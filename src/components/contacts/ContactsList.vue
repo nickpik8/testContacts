@@ -10,7 +10,7 @@
             <div class="contact-email">
                 e-mail
             </div>
-            <div class="btn-group">
+            <div class="btn-group btn-group-title__visible">
                 Действия
             </div>
         </li>
@@ -52,7 +52,7 @@ export default {
 }
 .contact-title{
     font-weight: 700;
-    @media(max-width: 400px){
+    @media(max-width: 450px){
         display: none;
     }
 }

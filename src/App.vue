@@ -31,4 +31,8 @@ input{
     font-weight: 700;
     text-transform: uppercase;
 }
+a{
+  color: #008cff;
+  text-decoration: none;
+}
 </style>

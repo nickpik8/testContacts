@@ -2,9 +2,8 @@
   <div id="contacts">
     <div class="logout">
       <span> {{ userName.email }} </span>
-      <a 
-        @click.prevent="logout" 
-        href="#">Выйти
+      <a @click.prevent="logout" href="#">
+        Выйти
       </a>
     </div>
     <div class="group-form">
@@ -45,7 +44,6 @@ export default {
     filterContacts(){
       if(this.searchText){
         let foundContactsName = this.contacts.filter(contact => contact.name.toLowerCase().includes(this.searchText));
-       // let foundContactsEmail = this.contacts.filter(contact => contact.email.includes(this.searchText));
         return foundContactsName.concat(this.contacts.filter(contact => contact.email.toLowerCase().includes(this.searchText)));
       }
       else{
@@ -55,9 +53,11 @@ export default {
   },
   methods: {
     async logout(){
-      await this.$store.dispatch('logout')
-      .then(this.$router.push('/')
-      );
+      try{
+        await this.$store.dispatch('logout');
+        this.$router.push('/')
+      }
+      catch(e){}
     },
     searchContact(text){
       this.searchText = text;
@@ -146,13 +146,24 @@ h1{
   flex-direction: column;
   align-items: center;
   width: 100%;
-  @media(max-width: 768px){
+  @media(max-width: 767px){
     align-items: center;
   }
 }
 .logout{
-  background-color: #17a56a;
+  background-color: #e8e8e8;
+  height: 2rem;
+  min-width: 200px;
   margin-left: auto;
+  padding-top: .5rem;
+}
+.logout a{
+  color: #000000;
+  font-size: 1.2em;
+  margin-left: 1rem;
+}
+.logout a:hover{
+  color: #888;
 }
 .not-found{
   display: block;

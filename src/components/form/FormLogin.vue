@@ -2,15 +2,18 @@
     <div class="input-form">
         <form @submit.prevent="login" id="auth">
             <label for="login">Логин</label>
-            <input v-model="email" id="login" name="login" type="text">
+            <input 
+                v-model="email" 
+                id="login" name="login" type="text">
             <label for="password">Пароль</label>
-            <input v-model="password" id="password" name="password" type="text">
-            <input type="submit" value="ВОЙТИ"/>
+            <input 
+                v-model="password" 
+                id="password" name="password" type="text">
+            <input value="ВОЙТИ" type="submit"/>
         </form>
     </div>
 </template>
 <script>
-import TextBox from '@/components/form/TextBox';
 export default {
     name: "FormLogin",
     data(){
@@ -21,13 +24,12 @@ export default {
     },
     methods: {
         async login(){
-            await this.$store.dispatch('login', {email: this.email, password: this.password })
-            .then(() => this.$router.push('/contacts')
-            .catch(error => console.error(error)));
+            try{
+                await this.$store.dispatch('login', {email: this.email, password: this.password })
+                this.$router.push('/contacts')
+            }
+            catch(e){}
         }
-    },     
-    components: {
-        TextBox
     }
 }
 </script>
@@ -51,7 +53,7 @@ export default {
 #auth input:last-child{
     margin-bottom: 0;
 }
-@media (max-width: 400px){
+@media (max-width: 450px){
     .input-form{
         width: 95%;
     }
