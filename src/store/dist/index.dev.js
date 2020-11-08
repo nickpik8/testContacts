@@ -11,16 +11,24 @@ var _vuex = _interopRequireDefault(require("vuex"));
 
 var _app = _interopRequireDefault(require("firebase/app"));
 
-var _errors = _interopRequireDefault(require("./errors"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
 
 var _default = new _vuex["default"].Store({
-  state: function state() {},
-  mutations: {},
-  getters: {},
+  state: {
+    email: null
+  },
+  mutations: {
+    setEmail: function setEmail(state, userEmail) {
+      state.email = userEmail;
+    }
+  },
+  getters: {
+    getEmail: function getEmail(state) {
+      return state.email;
+    }
+  },
   actions: {
     login: function login(_ref, data) {
       var dispatch, commit;
@@ -34,21 +42,23 @@ var _default = new _vuex["default"].Store({
               return regeneratorRuntime.awrap(_app["default"].auth().signInWithEmailAndPassword(data.email, data.password));
 
             case 4:
-              _context.next = 10;
+              dispatch('setUserEmail');
+              _context.next = 12;
               break;
 
-            case 6:
-              _context.prev = 6;
+            case 7:
+              _context.prev = 7;
               _context.t0 = _context["catch"](1);
-              console.log(_context.t0);
+              console.log(_context.t0.message);
+              alert('Неверный логин или пароль, проверьте правильность введенных данных!');
               throw _context.t0;
 
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[1, 6]]);
+      }, null, null, [[1, 7]]);
     },
     logout: function logout() {
       return regeneratorRuntime.async(function logout$(_context2) {
@@ -75,6 +85,11 @@ var _default = new _vuex["default"].Store({
           }
         }
       }, null, null, [[0, 5]]);
+    },
+    setUserEmail: function setUserEmail(_ref2) {
+      var dispatch = _ref2.dispatch,
+          commit = _ref2.commit;
+      commit('setEmail', _app["default"].auth().currentUser.email);
     }
   },
   modules: {}

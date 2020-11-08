@@ -1,27 +1,32 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
-import errorMessage from './errors'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state(){
-    
+  state: {
+    email: null
   },
   mutations: {
-
-  },
+    setEmail(state, userEmail){
+      state.email = userEmail;
+    }
+  },  
   getters: {
-
+    getEmail: state => {
+      return state.email;
+    }
   },
   actions: {
     async login({dispatch, commit}, data){
       try{
-        await firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+        await firebase.auth().signInWithEmailAndPassword(data.email, data.password); 
+        dispatch('setUserEmail');
       }
       catch(e){
-        console.log(e);
+        console.log(e.message);
+        alert('Неверный логин или пароль, проверьте правильность введенных данных!')
         throw e;
       }
     },
@@ -33,6 +38,9 @@ export default new Vuex.Store({
         console.log(e);
         throw e;
       }
+    },
+    setUserEmail({dispatch, commit}){
+      commit('setEmail', firebase.auth().currentUser.email);
     }
   },
   modules: {

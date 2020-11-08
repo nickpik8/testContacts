@@ -1,7 +1,7 @@
 <template>
   <div id="contacts">
     <div class="logout">
-      <span> {{ userName.email }} </span>
+      <span> {{ userEmail }} </span>
       <a @click.prevent="logout" href="#">
         Выйти
       </a>
@@ -30,25 +30,31 @@ import FormSearch from '@/components/form/FormSearch'
 import FormAddContact from '@/components/form/FormAddContact'
 import ContactsList from '@/components/contacts/ContactsList'
 import Loader from '@/components/Loader'
-import firebase from 'firebase/app'
 export default {
   data(){
     return{
       contacts: [],
       loading: true,
       searchText: '',
-      userName: firebase.auth().currentUser
     }
   },
   computed: {
+    //Ищем и по имени и по e-mail
     filterContacts(){
       if(this.searchText){
-        let foundContactsName = this.contacts.filter(contact => contact.name.toLowerCase().includes(this.searchText));
-        return foundContactsName.concat(this.contacts.filter(contact => contact.email.toLowerCase().includes(this.searchText)));
+        let foundContactsName = this.contacts.filter(
+          contact => contact.name.toLowerCase().includes(this.searchText)
+        );
+        return foundContactsName.concat(this.contacts.filter(
+          contact => contact.email.toLowerCase().includes(this.searchText))
+        );
       }
       else{
         return this.contacts;
       }
+    },
+    userEmail(){
+      return this.$store.getters.getEmail;
     }
   },
   methods: {
@@ -125,7 +131,7 @@ export default {
       this.loading = false;
     })
     .catch(error => {console.error(error)});
-    console.log(this.userName.email)
+    this.$store.dispatch('setUserEmail');
   },
   components: {
     ContactsList, Loader, FormAddContact, FormSearch

@@ -52,12 +52,16 @@ export default {
     },
     data(){
         return{
-            edit: false
+            edit: false,
+            copyName: null,
+            copyEmail: null
         }
     },
     methods: {
         editContact(){
             this.edit = true;
+            this.copyName = this.item.name;
+            this.copyEmail = this.item.email;
         },
         saveEditContact(){
             this.$emit('edit-contact', this.item);
@@ -65,6 +69,8 @@ export default {
         },
         cancelEdit(){
             this.edit = false;
+            this.item.name = this.copyName;
+            this.item.email = this.copyEmail;
         },
         removeContact(){
             this.$emit('remove-contact', this.item.id)
