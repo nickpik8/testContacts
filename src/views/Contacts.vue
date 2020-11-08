@@ -2,23 +2,26 @@
   <div id="contacts">
     <div class="logout">
       <span> {{ userName.email }} </span>
-      <a @click.prevent="logout" href="#">Выйти</a>
+      <a 
+        @click.prevent="logout" 
+        href="#">Выйти
+      </a>
     </div>
     <div class="group-form">
-      <FormAddContact 
-      @add-contact="addContact"
-      />
       <FormSearch 
-      @search-contact="searchContact"
+        @search-contact="searchContact"
+      />
+      <FormAddContact 
+        @add-contact="addContact"
       />
     </div>
     <h1>Список контактов</h1>
     <Loader v-if="loading"/>
     <ContactsList 
-    v-else-if="filterContacts.length"
-    :contacts="filterContacts"
-    @edit-contact="editContact"
-    @remove-contact="removeContact"
+      v-else-if="filterContacts.length"
+      :contacts="filterContacts"
+      @edit-contact="editContact"
+      @remove-contact="removeContact"
     />
     <span v-else class="not-found">Ничего не найдено!</span>
   </div>
@@ -132,6 +135,7 @@ export default {
 <style lang="scss" scoped>
 #contacts{
   display: flex;
+  flex-direction: column;
 }
 h1{
   margin-top: .5rem;
@@ -139,10 +143,10 @@ h1{
 }
 .group-form{
   display: flex;
-  flex-flow: row wrap;
-/*  justify-content: space-between;*/
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   @media(max-width: 768px){
-    flex-direction: column-reverse;
     align-items: center;
   }
 }

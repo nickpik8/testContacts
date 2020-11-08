@@ -26,7 +26,7 @@ export default {
 input{
     height: 2rem;
 }
-label{
+.big-title{
     margin-right: 1rem;
     font-weight: 700;
     text-transform: uppercase;

@@ -1,20 +1,26 @@
 <template>
     <div class="add-form">
+        <div class="big-title add-title">
+            Добавить контакт
+        </div>
         <form class="add-contact-form">
-            <label for="add-contact" class="add-contact-title">
-                Добавить контакт
+            <label for="add-name">
+                ФИО
             </label>
             <input 
-            v-model.trim="newName" 
-            id="add-contact" name="add-contact" type="text"
+                v-model.trim="newName" 
+                class="add-contact" name="add-name" type="text"
+            />
+            <label for="add-name">
+                E-mail
+            </label>
+            <input 
+                v-model.trim="newEmail" 
+                class="add-contact" name="add-email" type="text"
             />
             <input 
-            v-model.trim="newEmail" 
-            id="add-contact" name="add-contact" type="text"
-            />
-            <input 
-            @click.prevent="addContact" 
-            class="add-contact-submit" value="Добавить" type="submit"
+                @click.prevent="addContact" 
+                class="add-contact-submit" value="Добавить" type="submit"
             />
         </form>
     </div>
@@ -53,33 +59,29 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .add-form{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     margin: 1rem;
-   /* max-width: 60%;*/
 }
-@media(max-width: 400px){
-    .add-form{
-        flex-direction: column;
-    }
-}
-@media(max-width: 767px){
-    input{
-    width: 100%;
+.add-title{
+    margin-bottom: 1rem;
     margin-top: .5rem;
-}
-}
-.add-contact-title{
-
 }
 .add-contact-submit{
     height: 2.2rem;
+    @media(max-width: 767px){
+        width: 100%;
+        margin-top: 1rem;
+    }
 }
-#add-contact{
+.add-contact{
     min-width: 250px;
+    @media(max-width: 767px){
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
 }
 </style>

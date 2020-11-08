@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <form @submit.prevent="" class="search-form">
-            <label for="search">Поиск</label>
+            <label for="search" class="big-title">Поиск</label>
             <input @input="searchContact" v-model="text" id="search" name="search" type="text"/>
         </form>
     </div>
@@ -27,10 +27,9 @@ export default {
 .search{
     display: flex;
     flex-direction: row;
-    margin: 1rem;
-    max-width: 40%;
+    margin-top: 1rem;
     @media(max-width: 400px){
-        flex-direction: column;
+        width: 100%;
     }
 }
 #search{
