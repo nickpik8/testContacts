@@ -13,7 +13,7 @@ localhost:8080
 
 Приложение сделано на Vue
 
-JSON данные берутся с jsonplaceholder.typesode.com (взял данные comments, там есть поля имя и email)
+JSON данные берутся с jsonplaceholder.typecode.com (взял данные comments, там есть поля имя и email)
 
 Данные для авторизации - firebase.google.com
 
