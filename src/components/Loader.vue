@@ -8,6 +8,7 @@
   position: relative;
   width: 80px;
   height: 80px;
+  left: 45%;
 }
 .lds-default div {
   position: absolute;
